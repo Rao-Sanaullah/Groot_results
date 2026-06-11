@@ -528,51 +528,6 @@ footer a{color:var(--accent);text-decoration:none;}
 
 <hr class="div">
 
-<!-- SETUP -->
-<div class="sec" id="setup">
-  <div class="sec-hd"><h2>Quick setup</h2></div>
-  <p class="sec-sub">Running GR00T N1.6 or N1.7 inference on FFW-SG2 in IsaacLab.</p>
-
-  <div class="res-grid" style="margin-bottom:20px">
-    <div class="rc">
-      <h4 style="color:var(--n16);margin-bottom:12px">N1.6 policy server</h4>
-      <div class="cb"><div class="ch"><span class="lang">bash</span><button class="cpb" onclick="cp(this)">Copy</button></div>
-<pre><code><span class="cm"># Inside groot container</span>
-python gr00t/eval/run_gr00t_server.py \
-  --embodiment-tag NEW_EMBODIMENT \
-  --model-path &lt;checkpoint_path&gt; \
-  --modality-config-path \
-    config/ffw_sg2_only_head_cam_config.py \
-  --device cuda:0 \
-  --host 0.0.0.0 --port 5555</code></pre></div>
-    </div>
-    <div class="rc">
-      <h4 style="color:var(--n17);margin-bottom:12px">N1.7 policy server</h4>
-      <div class="cb"><div class="ch"><span class="lang">bash</span><button class="cpb" onclick="cp(this)">Copy</button></div>
-<pre><code><span class="cm"># Inside grootn17 container</span>
-<span class="cm"># No modality config needed</span>
-python gr00t/eval/run_gr00t_server.py \
-  --embodiment-tag NEW_EMBODIMENT \
-  --model-path &lt;checkpoint_path&gt; \
-  --device cuda:0 \
-  --host 0.0.0.0 --port 5556</code></pre></div>
-    </div>
-  </div>
-
-  <div class="cb"><div class="ch"><span class="lang">bash</span><button class="cpb" onclick="cp(this)">Copy</button></div>
-<pre><code><span class="cm"># Launch IsaacLab inference bridge (inside IsaacLab container)</span>
-python scripts/inference/groot_n16_inference.py \
-  --task RobotisLab-FFW-SG2-PickPlace-v0 \
-  --step_hz 60 \
-  --chunk_size 16 \
-  --robot_type FFW_SG2</code></pre></div>
-
-  <div class="links-row" style="margin-top:20px">
-    <a class="lnk lnk-primary" href="https://rao-sanaullah.github.io/GR00TN1.7/" target="_blank">Full N1.7 setup guide ↗</a>
-    <a class="lnk lnk-sec" href="https://github.com/NVIDIA/Isaac-GR00T" target="_blank">Isaac-GR00T ↗</a>
-    <a class="lnk lnk-sec" href="https://rao-sanaullah.github.io/starVLA_results/" target="_blank">StarVLA results ↗</a>
-  </div>
-</div>
 
 <footer>
   <p>GR00T N1.6 &amp; N1.7 deployed on <strong>ROBOTIS FFW-SG2 AI Worker</strong> · NVIDIA IsaacLab · DGX Spark</p>
