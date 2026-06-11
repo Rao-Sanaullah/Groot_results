@@ -2,7 +2,7 @@
 
 > Closed-loop VLA evaluation of NVIDIA GR00T N1.6 and N1.7 on the ROBOTIS FFW-SG2 AI Worker — simulation and real-robot deployment for bimanual pegboard manipulation.
 
-**[📊 Full Results Page](https://rao-sanaullah.github.io/groot-sg2-results/)** · **[🔧 GR00TN1.6 & N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN16_and_N17_Installation_Guide/)** · **[⭐ StarVLA Results](https://rao-sanaullah.github.io/starVLA_results/)** · **[📄 Paper](#)**
+**[📊 Full Results Page](https://rao-sanaullah.github.io/Groot_results/)** · **[🔧 GR00TN1.6 & N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN16_and_N17_Installation_Guide/)** · **[⭐ StarVLA Results](https://rao-sanaullah.github.io/starVLA_results/)** · **[📄 Paper](#)**
 
 ---
 
@@ -106,32 +106,6 @@ Duration    : ~96 min demonstration data
 | Denoising steps | 4 | 4 |
 
 ---
-
-## Repository Structure
-
-```
-groot-sg2-results/
-├── index.html                          # Results webpage
-├── README.md                           # This file
-│
-├── plots/
-│   ├── groot_n16_training_analysis.png
-│   ├── groot_n16_mae_analysis.png
-│   ├── groot_n17_training_analysis.png
-│   ├── groot_n17_mae_analysis.png
-│   ├── plot7_training_analysis_paper.png
-│   ├── plot4_training_comparison.png
-│   ├── plot1_episode_statistics.png
-│   ├── plot3_joint_trajectories.png
-│   ├── plot5_action_std_comparison.png
-│   └── plot6_frame_montage.png
-│
-└── videos/
-    ├── groot_n16_real_success.mp4
-    ├── groot_n16_real_failure.mp4
-    ├── groot_n16_sim.mp4
-    └── groot_n17_sim.mp4
-```
 
 ---
 
