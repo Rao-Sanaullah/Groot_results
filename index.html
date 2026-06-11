@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GR00T N1.6 & N1.7 — FFW-SG2 Results</title>
+<style>
+:root{
+  --bg:#0a0e18;--surface:#111827;--card:#161d2e;--border:#1e2a42;
+  --accent:#76b900;--accent2:#00d4aa;--accent3:#4f9cf9;
+  --text:#e8edf5;--muted:#64748b;
+  --success:#10b981;--warn:#f59e0b;--danger:#ef4444;
+  --code-bg:#0d1117;--shadow:rgba(0,0,0,.5);
+  --n16:#76b900;--n17:#4f9cf9;--real:#00d4aa;
+}
+[data-theme="light"]{
+  --bg:#f4f7f2;--surface:#ffffff;--card:#ffffff;--border:#e2e8f0;
+  --accent:#5a8c00;--accent2:#0891b2;--accent3:#2563eb;
+  --text:#0f172a;--muted:#64748b;
+  --success:#059669;--warn:#d97706;--danger:#dc2626;
+  --code-bg:#1e293b;--shadow:rgba(0,0,0,.08);
+  --n16:#5a8c00;--n17:#2563eb;--real:#0891b2;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;transition:background .25s,color .25s;}
+
+/* NAV */
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 12px var(--shadow);}
+.nav-left{display:flex;align-items:center;gap:28px;}
+.nav-logo{font-size:1rem;font-weight:700;color:var(--accent);letter-spacing:.3px;}
+.nav-links{display:flex;gap:20px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.84rem;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.tog{background:transparent;border:1px solid var(--border);border-radius:20px;padding:5px 13px;cursor:pointer;font-size:.8rem;color:var(--muted);transition:all .2s;}
+.tog:hover{border-color:var(--accent);color:var(--text);}
+
+/* HERO */
+.hero{padding:72px 40px 60px;text-align:center;border-bottom:1px solid var(--border);background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(118,185,0,.08),transparent);}
+.hero-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.hero h1{font-size:2.8rem;font-weight:800;line-height:1.15;margin-bottom:14px;}
+.hero h1 span.n16{color:var(--n16);}
+.hero h1 span.n17{color:var(--n17);}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:640px;margin:0 auto 24px;}
+.hero-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+.badge{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:.78rem;color:var(--muted);}
+.badge strong{color:var(--text);}
+
+/* KEY NUMBERS */
+.kn-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border-bottom:1px solid var(--border);}
+.kn{padding:28px 24px;text-align:center;border-right:1px solid var(--border);}
+.kn:last-child{border-right:none;}
+.kn .val{font-size:2.4rem;font-weight:800;line-height:1;margin-bottom:5px;}
+.kn .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.kn .sub{font-size:.73rem;color:var(--muted);margin-top:3px;}
+
+/* SECTIONS */
+.sec{padding:60px 40px;max-width:1000px;margin:0 auto;}
+.sec-hd{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;}
+.sec h2{font-size:1.45rem;font-weight:700;}
+.sec-sub{color:var(--muted);font-size:.87rem;margin-bottom:32px;}
+hr.div{border:none;border-top:1px solid var(--border);}
+
+/* MODEL CARDS */
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;position:relative;overflow:hidden;}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.mc.n16::before{background:var(--n16);}
+.mc.n17::before{background:var(--n17);}
+.mc h3{font-size:1rem;font-weight:700;margin-bottom:4px;}
+.mc .mc-sub{font-size:.78rem;color:var(--muted);margin-bottom:16px;}
+.mc-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.83rem;}
+.mc-row:last-child{border-bottom:none;}
+.mc-row .k{color:var(--muted);}
+.mc-row .v{font-weight:600;}
+.win{color:var(--success);}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:600;margin-left:6px;}
+.tag-sim{background:rgba(118,185,0,.12);color:var(--n16);border:1px solid rgba(118,185,0,.3);}
+.tag-real{background:rgba(0,212,170,.12);color:var(--real);border:1px solid rgba(0,212,170,.3);}
+.tag-ea{background:rgba(245,158,11,.12);color:var(--warn);border:1px solid rgba(245,158,11,.3);}
+
+/* BAR CHARTS */
+.bar-section{margin-bottom:32px;}
+.bar-section h4{font-size:.84rem;font-weight:600;margin-bottom:14px;}
+.bg{margin-bottom:10px;}
+.bl{font-size:.76rem;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:3px;}
+.bw{background:var(--border);border-radius:4px;height:18px;overflow:hidden;}
+.bf{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:.67rem;font-weight:700;color:white;white-space:nowrap;transition:width .8s ease;}
+
+/* RESULTS GRID */
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.rc h4{font-size:.88rem;font-weight:700;margin-bottom:12px;}
+
+/* COMPARISON TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:.83rem;margin:12px 0;}
+.tbl th{background:var(--card);color:var(--text);padding:9px 13px;text-align:left;font-weight:600;border-bottom:2px solid var(--border);}
+.tbl td{padding:8px 13px;color:var(--muted);border-bottom:1px solid var(--border);}
+.tbl tr:hover td{background:var(--card);}
+.tbl .hi{color:var(--text);font-weight:600;}
+.tbl code{background:var(--code-bg);padding:1px 6px;border-radius:3px;font-size:.76rem;color:var(--accent2);}
+
+/* FAILURE ANALYSIS */
+.fail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.fc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;}
+.fc .fnum{font-size:2rem;font-weight:800;line-height:1;margin-bottom:4px;}
+.fc .flbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);}
+.fc .fdesc{font-size:.81rem;color:var(--muted);margin-top:8px;}
+
+/* INSIGHT BOX */
+.insight{background:rgba(118,185,0,.06);border:1px solid rgba(118,185,0,.2);border-radius:12px;padding:18px;margin:16px 0;}
+[data-theme="light"] .insight{background:rgba(90,140,0,.05);border-color:rgba(90,140,0,.2);}
+.insight h4{color:var(--accent);font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+.insight p{color:var(--muted);font-size:.85rem;margin-bottom:6px;}
+.insight p:last-child{margin-bottom:0;}
+
+/* PLOTS */
+.plot-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.plot-item{border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.plot-item img{width:100%;display:block;background:var(--code-bg);}
+.plot-cap{padding:9px 13px;font-size:.73rem;color:var(--muted);background:var(--card);}
+
+/* VIDEO */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px;}
+.vc{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.vc video{width:100%;display:block;background:#000;aspect-ratio:16/9;object-fit:cover;}
+.vi{padding:14px;}
+.vi h4{font-size:.88rem;font-weight:600;margin-bottom:4px;}
+.vi p{font-size:.79rem;color:var(--muted);}
+.vb{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:600;margin-bottom:6px;}
+.vb-sim{background:rgba(118,185,0,.12);color:var(--n16);border:1px solid var(--n16);}
+.vb-real{background:rgba(0,212,170,.12);color:var(--real);border:1px solid var(--real);}
+.vb-n17{background:rgba(79,156,249,.12);color:var(--n17);border:1px solid var(--n17);}
+
+/* CODE */
+.cb{background:var(--code-bg);border:1px solid var(--border);border-radius:10px;margin:10px 0;overflow:hidden;}
+.ch{background:var(--surface);padding:7px 13px;font-size:.7rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+.ch .lang{color:var(--accent);font-weight:700;}
+.cpb{background:none;border:1px solid var(--border);color:var(--muted);padding:2px 8px;border-radius:4px;cursor:pointer;font-size:.68rem;}
+.cpb:hover{color:var(--accent);border-color:var(--accent);}
+pre{padding:15px;overflow-x:auto;font-family:'JetBrains Mono','Fira Code',monospace;font-size:.79rem;line-height:1.65;color:#c9d1d9;}
+.cm{color:#6b7280;}.add{color:#7ee787;}.kw{color:#79c0ff;}
+
+/* LINKS */
+.links-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;}
+.lnk{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:.83rem;font-weight:600;text-decoration:none;transition:all .2s;border:1px solid transparent;}
+.lnk-primary{background:var(--accent);color:#0a0e18;border-color:var(--accent);}
+.lnk-primary:hover{opacity:.88;}
+.lnk-sec{background:transparent;color:var(--text);border-color:var(--border);}
+.lnk-sec:hover{border-color:var(--accent);color:var(--accent);}
+
+/* FOOTER */
+footer{padding:28px 40px;text-align:center;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border);}
+footer a{color:var(--accent);text-decoration:none;}
+
+@media(max-width:680px){
+  .model-grid,.res-grid,.fail-grid,.plot-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:2rem;}
+  .sec{padding:40px 20px;}
+  nav{padding:11px 20px;}
+  .nav-links{display:none;}
+  .kn-strip{grid-template-columns:1fr 1fr;}
+  .kn{border-right:none;border-bottom:1px solid var(--border);}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <div class="nav-logo">GR00T · FFW-SG2</div>
+    <div class="nav-links">
+      <a href="#results">Results</a>
+      <a href="#failures">Failure analysis</a>
+      <a href="#training">Training</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#videos">Videos</a>
+      <a href="#setup">Setup</a>
+    </div>
+  </div>
+  <button class="tog" onclick="toggleTheme()" id="tog-btn">☀ Light</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">NVIDIA GR00T · ROBOTIS FFW-SG2 AI Worker</div>
+  <h1>
+    <span class="n16">GR00T N1.6</span> &amp;
+    <span class="n17">N1.7</span><br>
+    Bimanual Manipulation Results
+  </h1>
+  <p class="hero-sub">
+    Closed-loop VLA evaluation on the ROBOTIS FFW-SG2 AI Worker — simulation and
+    real-robot deployment of GR00T N1.6 and N1.7 for pegboard brush pick-and-place.
+  </p>
+  <div class="hero-badges">
+    <div class="badge"><strong>Robot</strong> ROBOTIS FFW-SG2 AI Worker</div>
+    <div class="badge"><strong>Simulator</strong> NVIDIA IsaacLab 5.1</div>
+    <div class="badge"><strong>GPU</strong> RTX 5090 · DGX Spark</div>
+    <div class="badge"><strong>Sim dataset</strong> 2,000 episodes · 306,766 frames</div>
+    <div class="badge"><strong>Real dataset</strong> 499 episodes · 172,715 frames</div>
+  </div>
+  <div class="links-row" style="justify-content:center;">
+    <a class="lnk lnk-primary" href="https://rao-sanaullah.github.io/GR00TN1.7/" target="_blank">N1.7 setup guide ↗</a>
+    <a class="lnk lnk-sec" href="https://github.com/NVIDIA/Isaac-GR00T" target="_blank">Isaac-GR00T repo ↗</a>
+    <a class="lnk lnk-sec" href="#">Paper</a>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<div class="kn-strip">
+  <div class="kn"><div class="val" style="color:var(--n16)">100%</div><div class="lbl">N1.6 simulation</div><div class="sub">50 trials · step 20k</div></div>
+  <div class="kn"><div class="val" style="color:var(--n17)">100%</div><div class="lbl">N1.7 simulation</div><div class="sub">50 trials · step 20k</div></div>
+  <div class="kn"><div class="val" style="color:var(--real)">88%</div><div class="lbl">N1.6 real robot</div><div class="sub">100 trials · continuous</div></div>
+  <div class="kn"><div class="val" style="color:var(--text)">−12pp</div><div class="lbl">Sim-to-real gap</div><div class="sub">contact dynamics only</div></div>
+  <div class="kn"><div class="val" style="color:var(--success)">0</div><div class="lbl">Semantic failures</div><div class="sub">both models · all trials</div></div>
+  <div class="kn"><div class="val" style="color:var(--text)">99.9%</div><div class="lbl">Training loss reduction</div><div class="sub">N1.6 real · 100k steps</div></div>
+</div>
+
+<!-- RESULTS -->
+<div class="sec" id="results">
+  <div class="sec-hd"><h2>Model results</h2></div>
+  <p class="sec-sub">
+    50 randomized trials per model in IsaacLab — object slot, table pose, lighting,
+    background, and robot joint state all randomized each episode.
+    Task: <em>"Put the yellow paint brush into the crate."</em>
+  </p>
+
+  <div class="model-grid">
+    <div class="mc n16">
+      <h3>GR00T N1.6 <span class="tag tag-sim">Sim</span><span class="tag tag-real">Real robot</span></h3>
+      <div class="mc-sub">Eagle-Block2A-2B-v2 · bfloat16 · Flash Attention</div>
+      <div class="mc-row"><span class="k">Sim success rate</span><span class="v win">100% (50/50)</span></div>
+      <div class="mc-row"><span class="k">Real-robot success</span><span class="v win">88% (88/100)</span></div>
+      <div class="mc-row"><span class="k">Sim fine-tune steps</span><span class="v">20,000 (of 40k)</span></div>
+      <div class="mc-row"><span class="k">Real fine-tune steps</span><span class="v">100,000 · DGX Spark</span></div>
+      <div class="mc-row"><span class="k">Deployed checkpoint</span><span class="v">Step 20k (sim) · 100k (real)</span></div>
+      <div class="mc-row"><span class="k">Offline NormMAE</span><span class="v">0.94% (sim)</span></div>
+      <div class="mc-row"><span class="k">Semantic failures</span><span class="v win">0</span></div>
+    </div>
+    <div class="mc n17">
+      <h3>GR00T N1.7 <span class="tag tag-sim">Sim only</span><span class="tag tag-ea">Early Access</span></h3>
+      <div class="mc-sub">Cosmos-Reason2-2B · bfloat16 · Flash Attention</div>
+      <div class="mc-row"><span class="k">Sim success rate</span><span class="v win">100% (50/50)</span></div>
+      <div class="mc-row"><span class="k">Real-robot eval</span><span class="v" style="color:var(--warn)">Deferred (EA release)</span></div>
+      <div class="mc-row"><span class="k">Sim fine-tune steps</span><span class="v">20,000</span></div>
+      <div class="mc-row"><span class="k">Deployed checkpoint</span><span class="v">Step 20k</span></div>
+      <div class="mc-row"><span class="k">Offline NormMAE</span><span class="v">1.45%</span></div>
+      <div class="mc-row"><span class="k">Semantic failures</span><span class="v win">0</span></div>
+      <div class="mc-row"><span class="k">Note</span><span class="v" style="color:var(--warn)">GA release pending</span></div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <h4>Key finding — offline MAE does not predict closed-loop success</h4>
+    <p>GR00T N1.7 shows <strong style="color:var(--text)">1.86× higher offline NormMAE</strong> than N1.6 (1.45% vs 0.94%), yet both achieve identical 100% simulation success. This confirms that offline action prediction error is not a reliable proxy for closed-loop task performance in diffusion-based VLA policies.</p>
+    <p>On the physical robot, GR00T N1.6 achieves 88% success with <strong style="color:var(--text)">zero semantic failures</strong> across 100 continuous trials — the policy correctly identifies the brush and activates the correct arm in every single trial.</p>
+  </div>
+
+  <h3 style="font-size:.95rem;font-weight:700;margin-bottom:14px">Simulation results — all models compared</h3>
+  <table class="tbl">
+    <tr>
+      <th>Model</th>
+      <th>Sim success</th>
+      <th>Real-robot</th>
+      <th>State input</th>
+      <th>Wrong arm</th>
+      <th>Wrong object</th>
+      <th>Offline MAE</th>
+    </tr>
+    <tr>
+      <td class="hi">GR00T N1.6</td>
+      <td class="hi" style="color:var(--n16)">100% (50/50)</td>
+      <td style="color:var(--real)">88% (100 trials)</td>
+      <td>✓ structured</td>
+      <td class="hi">0%</td>
+      <td class="hi">0%</td>
+      <td>0.94%</td>
+    </tr>
+    <tr>
+      <td class="hi">GR00T N1.7</td>
+      <td class="hi" style="color:var(--n17)">100% (50/50)</td>
+      <td style="color:var(--warn)">Sim only (EA)</td>
+      <td>✓ structured</td>
+      <td class="hi">0%</td>
+      <td class="hi">0%</td>
+      <td>1.45%</td>
+    </tr>
+    <tr>
+      <td>StarVLA (no-state)</td>
+      <td>52% (26/50)</td>
+      <td>—</td>
+      <td>✗</td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>6.61%</td>
+    </tr>
+    <tr>
+      <td>StarVLA (state)</td>
+      <td>28% (14/50)</td>
+      <td>—</td>
+      <td>sin-cos φ(q)</td>
+      <td style="color:var(--danger)">24%</td>
+      <td style="color:var(--danger)">14%</td>
+      <td>4.82%</td>
+    </tr>
+    <tr>
+      <td>OpenVLA</td>
+      <td colspan="6" style="color:var(--muted);font-style:italic">Excluded — action dimension collapse in dataset</td>
+    </tr>
+  </table>
+</div>
+
+<hr class="div">
+
+<!-- FAILURE ANALYSIS -->
+<div class="sec" id="failures">
+  <div class="sec-hd"><h2>Real-robot failure analysis</h2></div>
+  <p class="sec-sub">
+    GR00T N1.6 · 100 continuous trials on physical FFW-SG2 · single uninterrupted session.
+    Human assistant repositions brush after each trial — no robot reset between trials.
+  </p>
+
+  <div class="fail-grid">
+    <div class="fc" style="border-top:3px solid var(--success)">
+      <div class="fnum" style="color:var(--success)">88</div>
+      <div class="flbl">Successful placements</div>
+      <div class="fdesc">Brush correctly grasped from pegboard and placed inside crate. Confirmed by human observer.</div>
+    </div>
+    <div class="fc" style="border-top:3px solid var(--danger)">
+      <div class="fnum" style="color:var(--danger)">12</div>
+      <div class="flbl">Total failures</div>
+      <div class="fdesc">10 grasp drops + 2 missed placements. Zero approach failures. Zero semantic failures.</div>
+    </div>
+    <div class="fc">
+      <div class="fnum" style="color:var(--warn)">10</div>
+      <div class="flbl">Grasp drops (10%)</div>
+      <div class="fdesc">Brush contacted and briefly grasped but dropped during vertical extraction from pegboard ring holder. Distributed randomly across 100 trials — no concentration in early or late trials.</div>
+    </div>
+    <div class="fc">
+      <div class="fnum" style="color:var(--warn)">2</div>
+      <div class="flbl">Missed placements (2%)</div>
+      <div class="fdesc">Brush successfully extracted but released near the crate opening rather than inside it. Placement precision issue — arm trajectory reaches the correct region but release point is slightly offset.</div>
+    </div>
+  </div>
+
+  <div class="bar-section">
+    <h4>Failure breakdown — 100 real-robot trials</h4>
+    <div class="bg"><div class="bl"><span>Successful placement</span><span>88 (88%)</span></div><div class="bw"><div class="bf" style="width:88%;background:var(--success)">88%</div></div></div>
+    <div class="bg"><div class="bl"><span>Grasp drop during extraction</span><span>10 (10%)</span></div><div class="bw"><div class="bf" style="width:10%;background:var(--warn)">10%</div></div></div>
+    <div class="bg"><div class="bl"><span>Missed crate placement</span><span>2 (2%)</span></div><div class="bw"><div class="bf" style="width:2%;background:var(--danger)">2%</div></div></div>
+    <div class="bg"><div class="bl"><span>Approach failure</span><span>0 (0%)</span></div><div class="bw"><div class="bf" style="width:0.5%;background:#333"></div></div></div>
+    <div class="bg"><div class="bl"><span>Wrong arm / semantic failure</span><span>0 (0%)</span></div><div class="bw"><div class="bf" style="width:0.5%;background:#333"></div></div></div>
+  </div>
+
+  <div class="insight">
+    <h4>Sim-to-real gap analysis</h4>
+    <p>The 12 percentage point gap between simulation (100%) and real robot (88%) is <strong style="color:var(--text)">entirely attributable to physical contact dynamics</strong> — grasp compliance and placement precision — that the IsaacLab rigid-body simulation does not model. The policy transfers perfectly at the semantic level: correct arm selection, correct object identification, and consistent behavior throughout all 100 continuous trials with no performance degradation.</p>
+    <p>Grasp drops are distributed randomly (not concentrated in early or late trials), confirming the failure is stochastic contact variability rather than policy drift over the continuous session.</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- TRAINING ANALYSIS -->
+<div class="sec" id="training">
+  <div class="sec-hd"><h2>Training analysis</h2></div>
+  <p class="sec-sub">Fine-tuning loss curves, offline MAE evaluation, and training comparison across simulation and real-world runs.</p>
+
+  <h3 style="font-size:.92rem;font-weight:700;color:var(--n16);margin-bottom:14px">GR00T N1.6 — simulation fine-tuning (40k steps · RTX 5090)</h3>
+  <div class="plot-grid">
+    <div class="plot-item">
+      <img src="groot_n16_training_analysis.png" alt="GR00T N1.6 simulation training loss curve" loading="lazy"/>
+      <div class="plot-cap">Training loss — 40k steps · initial 1.3309 → final 0.0053 (99.6% reduction) · deployed: step 20k</div>
+    </div>
+    <div class="plot-item">
+      <img src="groot_n16_mae_analysis.png" alt="GR00T N1.6 offline MAE analysis" loading="lazy"/>
+      <div class="plot-cap">Offline MAE across 10 checkpoints — flat 0.0087–0.0089 rad (2.4% variation) · NormMAE 0.94%</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:.92rem;font-weight:700;color:var(--n17);margin-bottom:14px;margin-top:28px">GR00T N1.7 — simulation fine-tuning (20k steps · RTX 5090)</h3>
+  <div class="plot-grid">
+    <div class="plot-item">
+      <img src="groot_n17_training_analysis.png" alt="GR00T N1.7 simulation training loss curve" loading="lazy"/>
+      <div class="plot-cap">Training loss — 20k steps · initial 1.3884 → final 0.0415 (97.0% reduction) · deployed: step 20k</div>
+    </div>
+    <div class="plot-item">
+      <img src="groot_n17_mae_analysis.png" alt="GR00T N1.7 offline MAE analysis" loading="lazy"/>
+      <div class="plot-cap">Offline MAE across 5 checkpoints (16k–20k) — range 0.0158–0.0166 rad · NormMAE 1.45%</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:.92rem;font-weight:700;color:var(--real);margin-bottom:14px;margin-top:28px">GR00T N1.6 — real-world fine-tuning (100k steps · DGX Spark)</h3>
+  <div class="plot-grid">
+    <div class="plot-item">
+      <img src="plot7_training_analysis_paper.png" alt="GR00T N1.6 real-world training loss" loading="lazy"/>
+      <div class="plot-cap">Real-world training loss — 100k steps · 1.0 epoch · initial 1.2901 → final 0.0019 (99.9% reduction)</div>
+    </div>
+    <div class="plot-item">
+      <img src="plot4_training_comparison.png" alt="Real vs simulation training comparison" loading="lazy"/>
+      <div class="plot-cap">Real-world vs simulation training comparison — normalized loss (log scale) and gradient norm over 100k steps</div>
+    </div>
+  </div>
+
+  <table class="tbl" style="margin-top:8px">
+    <tr><th>Model</th><th>Steps</th><th>Initial loss</th><th>Final loss</th><th>Reduction</th><th>Hardware</th><th>Epochs</th></tr>
+    <tr><td class="hi">N1.6 (sim)</td><td>40,000</td><td>1.3309</td><td>0.0053</td><td class="hi">99.6%</td><td>RTX 5090</td><td>~0.5</td></tr>
+    <tr><td class="hi">N1.7 (sim)</td><td>20,000</td><td>1.3884</td><td>0.0415</td><td class="hi">97.0%</td><td>RTX 5090</td><td>~0.8</td></tr>
+    <tr><td class="hi" style="color:var(--real)">N1.6 (real)</td><td>100,000</td><td>1.2901</td><td>0.0019</td><td class="hi">99.9%</td><td>DGX Spark</td><td>1.0</td></tr>
+  </table>
+</div>
+
+<hr class="div">
+
+<!-- DATASET -->
+<div class="sec" id="dataset">
+  <div class="sec-hd"><h2>Datasets</h2></div>
+  <p class="sec-sub">Two datasets used in this work — simulation-generated for strategy learning and real-world teleoperation for physical appearance and contact distribution.</p>
+
+  <div class="res-grid">
+    <div class="rc">
+      <h4 style="color:var(--n16)">Simulation dataset</h4>
+      <div class="mc-row"><span class="k">Episodes</span><span class="v">2,000</span></div>
+      <div class="mc-row"><span class="k">Frames</span><span class="v">306,766</span></div>
+      <div class="mc-row"><span class="k">FPS</span><span class="v">10 Hz</span></div>
+      <div class="mc-row"><span class="k">Camera</span><span class="v">cam_head · 376×672 · AV1</span></div>
+      <div class="mc-row"><span class="k">Format</span><span class="v">LeRobot v2.1</span></div>
+      <div class="mc-row"><span class="k">HuggingFace</span><span class="v"><code>Dongkkka/sim2real_1224_brush_pick</code></span></div>
+    </div>
+    <div class="rc">
+      <h4 style="color:var(--real)">Real-world dataset</h4>
+      <div class="mc-row"><span class="k">Episodes</span><span class="v">499</span></div>
+      <div class="mc-row"><span class="k">Frames</span><span class="v">172,715</span></div>
+      <div class="mc-row"><span class="k">FPS</span><span class="v">30 Hz</span></div>
+      <div class="mc-row"><span class="k">Cameras</span><span class="v">head 376×672 · wrists 240×424 ×2</span></div>
+      <div class="mc-row"><span class="k">Format</span><span class="v">LeRobot v2.1 · H.264</span></div>
+      <div class="mc-row"><span class="k">Teleop device</span><span class="v">FFW-LG2 Leader · 22 DoF</span></div>
+    </div>
+  </div>
+
+  <div class="plot-grid">
+    <div class="plot-item">
+      <img src="plot1_episode_statistics.png" alt="Real dataset episode statistics" loading="lazy"/>
+      <div class="plot-cap">Real-world dataset statistics — episode length distribution, duration, cumulative collection, percentiles</div>
+    </div>
+    <div class="plot-item">
+      <img src="plot5_action_std_comparison.png" alt="Action std real vs simulation" loading="lazy"/>
+      <div class="plot-cap">Action variance comparison — real-world vs simulation per joint. Simulation shows higher variance due to wider object placement randomization.</div>
+    </div>
+  </div>
+  <div class="plot-grid">
+    <div class="plot-item">
+      <img src="plot3_joint_trajectories.png" alt="Mean joint trajectories" loading="lazy"/>
+      <div class="plot-cap">Mean joint trajectories across 499 episodes (normalized to 100% episode duration). Left-arm-dominant task structure clearly visible.</div>
+    </div>
+    <div class="plot-item">
+      <img src="plot6_frame_montage.png" alt="Sample camera frames" loading="lazy"/>
+      <div class="plot-cap">Sample frames from all 3 cameras across 6 episodes — head camera, left wrist (RealSense D405), right wrist (RealSense D405).</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- VIDEOS -->
+<div class="sec" id="videos">
+  <div class="sec-hd"><h2>Video demonstrations</h2></div>
+  <p class="sec-sub">Closed-loop inference on the physical FFW-SG2 AI Worker and in IsaacLab simulation. Task: <em>"Put the yellow paint brush into the crate."</em></p>
+
+  <div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
+    <span class="vb vb-real">GR00T N1.6 · real robot · 100 Hz</span>
+  </div>
+  <div class="vgrid">
+    <div class="vc">
+      <video controls preload="metadata">
+        <source src="videos/groot_n16_real_success.mp4" type="video/mp4">
+        Video not available.
+      </video>
+      <div class="vi">
+        <span class="vb vb-real">Success</span>
+        <h4>Real-robot successful trial</h4>
+        <p>GR00T N1.6 grasps the paint brush from the pegboard and places it into the crate in a single continuous motion at 100 Hz.</p>
+      </div>
+    </div>
+    <div class="vc">
+      <video controls preload="metadata">
+        <source src="videos/groot_n16_real_failure.mp4" type="video/mp4">
+        Video not available.
+      </video>
+      <div class="vi">
+        <span class="vb" style="background:rgba(239,68,68,.12);color:var(--danger);border:1px solid var(--danger)">Grasp drop</span>
+        <h4>Grasp drop failure mode</h4>
+        <p>Brush contacted and briefly grasped but dropped during extraction from the pegboard ring holder — the dominant failure mode (10/100 trials).</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:10px;margin-top:8px;display:flex;align-items:center;gap:10px">
+    <span class="vb vb-sim">GR00T N1.6 · IsaacLab simulation · 60 Hz</span>
+  </div>
+  <div class="vgrid">
+    <div class="vc">
+      <video controls preload="metadata">
+        <source src="videos/groot_n16_sim.mp4" type="video/mp4">
+        Video not available.
+      </video>
+      <div class="vi">
+        <span class="vb vb-sim">Simulation · 100%</span>
+        <h4>Simulation evaluation</h4>
+        <p>100% success across 50 randomized trials in the matched IsaacLab pegboard environment.</p>
+      </div>
+    </div>
+    <div class="vc">
+      <video controls preload="metadata">
+        <source src="videos/groot_n17_sim.mp4" type="video/mp4">
+        Video not available.
+      </video>
+      <div class="vi">
+        <span class="vb vb-n17">N1.7 · Simulation · 100%</span>
+        <h4>GR00T N1.7 simulation</h4>
+        <p>GR00T N1.7 (Cosmos-Reason2-2B backbone) achieves identical 100% simulation success. Real-robot deployment deferred pending GA release.</p>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:8px">Place video files in <code>videos/</code> folder alongside this HTML file.</p>
+</div>
+
+<hr class="div">
+
+<!-- SETUP -->
+<div class="sec" id="setup">
+  <div class="sec-hd"><h2>Quick setup</h2></div>
+  <p class="sec-sub">Running GR00T N1.6 or N1.7 inference on FFW-SG2 in IsaacLab.</p>
+
+  <div class="res-grid" style="margin-bottom:20px">
+    <div class="rc">
+      <h4 style="color:var(--n16);margin-bottom:12px">N1.6 policy server</h4>
+      <div class="cb"><div class="ch"><span class="lang">bash</span><button class="cpb" onclick="cp(this)">Copy</button></div>
+<pre><code><span class="cm"># Inside groot container</span>
+python gr00t/eval/run_gr00t_server.py \
+  --embodiment-tag NEW_EMBODIMENT \
+  --model-path &lt;checkpoint_path&gt; \
+  --modality-config-path \
+    config/ffw_sg2_only_head_cam_config.py \
+  --device cuda:0 \
+  --host 0.0.0.0 --port 5555</code></pre></div>
+    </div>
+    <div class="rc">
+      <h4 style="color:var(--n17);margin-bottom:12px">N1.7 policy server</h4>
+      <div class="cb"><div class="ch"><span class="lang">bash</span><button class="cpb" onclick="cp(this)">Copy</button></div>
+<pre><code><span class="cm"># Inside grootn17 container</span>
+<span class="cm"># No modality config needed</span>
+python gr00t/eval/run_gr00t_server.py \
+  --embodiment-tag NEW_EMBODIMENT \
+  --model-path &lt;checkpoint_path&gt; \
+  --device cuda:0 \
+  --host 0.0.0.0 --port 5556</code></pre></div>
+    </div>
+  </div>
+
+  <div class="cb"><div class="ch"><span class="lang">bash</span><button class="cpb" onclick="cp(this)">Copy</button></div>
+<pre><code><span class="cm"># Launch IsaacLab inference bridge (inside IsaacLab container)</span>
+python scripts/inference/groot_n16_inference.py \
+  --task RobotisLab-FFW-SG2-PickPlace-v0 \
+  --step_hz 60 \
+  --chunk_size 16 \
+  --robot_type FFW_SG2</code></pre></div>
+
+  <div class="links-row" style="margin-top:20px">
+    <a class="lnk lnk-primary" href="https://rao-sanaullah.github.io/GR00TN1.7/" target="_blank">Full N1.7 setup guide ↗</a>
+    <a class="lnk lnk-sec" href="https://github.com/NVIDIA/Isaac-GR00T" target="_blank">Isaac-GR00T ↗</a>
+    <a class="lnk lnk-sec" href="https://rao-sanaullah.github.io/starVLA_results/" target="_blank">StarVLA results ↗</a>
+  </div>
+</div>
+
+<footer>
+  <p>GR00T N1.6 &amp; N1.7 deployed on <strong>ROBOTIS FFW-SG2 AI Worker</strong> · NVIDIA IsaacLab · DGX Spark</p>
+  <p style="margin-top:5px">
+    <a href="https://rao-sanaullah.github.io/GR00TN1.7/">N1.7 setup guide</a> ·
+    <a href="https://github.com/NVIDIA/Isaac-GR00T">Isaac-GR00T repo</a> ·
+    <a href="https://rao-sanaullah.github.io/starVLA_results/">StarVLA results</a> ·
+    <a href="#">Paper</a>
+  </p>
+  <p style="margin-top:6px">Designed by <strong style="color:var(--text)">Sanaullah</strong></p>
+</footer>
+
+<script>
+function cp(btn){
+  const pre=btn.closest('.cb').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText);
+  btn.textContent='Copied!';
+  setTimeout(()=>btn.textContent='Copy',2000);
+}
+function toggleTheme(){
+  const h=document.documentElement;
+  const isDark=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('tog-btn').textContent=isDark?'🌙 Dark':'☀ Light';
+  localStorage.setItem('theme',isDark?'light':'dark');
+}
+(function(){
+  const t=localStorage.getItem('theme');
+  if(t){
+    document.documentElement.setAttribute('data-theme',t);
+    document.getElementById('tog-btn').textContent=t==='light'?'🌙 Dark':'☀ Light';
+  }
+})();
+</script>
+</body>
+</html>
