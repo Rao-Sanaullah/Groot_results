@@ -2,7 +2,7 @@
 
 > Closed-loop VLA evaluation of NVIDIA GR00T N1.6 and N1.7 on the ROBOTIS FFW-SG2 AI Worker — simulation and real-robot deployment for bimanual pegboard manipulation.
 
-**[📊 Full Results Page](https://rao-sanaullah.github.io/groot-sg2-results/)** · **[🔧 N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN1.7/)** · **[⭐ StarVLA Results](https://rao-sanaullah.github.io/starVLA_results/)** · **[📄 Paper](#)**
+**[📊 Full Results Page](https://rao-sanaullah.github.io/groot-sg2-results/)** · **[🔧 GR00TN1.6 & N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN16_and_N17_Installation_Guide/)** · **[⭐ StarVLA Results](https://rao-sanaullah.github.io/starVLA_results/)** · **[📄 Paper](#)**
 
 ---
 
@@ -137,10 +137,10 @@ groot-sg2-results/
 
 ## Related Links
 
-- 🔧 [GR00T N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN1.7/) — full installation and fine-tuning walkthrough
+- 🔧 [GR00T N1.6 & N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN16_and_N17_Installation_Guide/) — full installation and fine-tuning walkthrough
 - ⭐ [StarVLA on FFW-SG2 Results](https://rao-sanaullah.github.io/starVLA_results/) — state-free vs state-conditioned comparison
 - 🤖 [Isaac-GR00T](https://github.com/NVIDIA/Isaac-GR00T) — official NVIDIA repository
-- 📦 [ROBOTIS FFW-SG2](https://en.robotis.com/) — robot platform
+- 📦 [ROBOTIS FFW-SG2](https://ai.robotis.com/) — robot platform
 
 ---
 
@@ -150,11 +150,10 @@ If you use these results or configurations in your work, please cite:
 
 ```bibtex
 @article{sanaullah2025groot_ffwsg2,
-  title   = {Evaluating Vision-Language-Action Models for Bimanual
-             Manipulation on the ROBOTIS FFW-SG2 AI Worker},
+  title   = {#},
   author  = {Sanaullah and others},
-  journal = {IEEE Robotics and Automation Letters},
-  year    = {2025}
+  journal = {#},
+  year    = {2026}
 }
 ```
 
