@@ -87,44 +87,6 @@ Duration    : ~96 min demonstration data
 
 ---
 
-## Quick Setup
-
-### Policy server — GR00T N1.6
-```bash
-# Inside groot Docker container
-python gr00t/eval/run_gr00t_server.py \
-  --embodiment-tag NEW_EMBODIMENT \
-  --model-path <checkpoint_path> \
-  --modality-config-path config/ffw_sg2_only_head_cam_config.py \
-  --device cuda:0 --host 0.0.0.0 --port 5555
-```
-
-### Policy server — GR00T N1.7
-```bash
-# Inside grootn17 Docker container — no modality config needed
-python gr00t/eval/run_gr00t_server.py \
-  --embodiment-tag NEW_EMBODIMENT \
-  --model-path <checkpoint_path> \
-  --device cuda:0 --host 0.0.0.0 --port 5556
-```
-
-### IsaacLab inference bridge
-```bash
-# Inside IsaacLab container
-python scripts/inference/groot_n16_inference.py \
-  --task RobotisLab-FFW-SG2-PickPlace-v0 \
-  --step_hz 60 \
-  --chunk_size 16 \
-  --robot_type FFW_SG2
-```
-
-### Real-robot inference (physical FFW-SG2)
-```bash
-# On inference workstation — connects to robot over CycloneDDS
-python scripts/inference/groot_n16_real.py
-# Task instruction via web UI at http://localhost:8000
-# or write directly: echo "Put the yellow paint brush into the crate." > /tmp/groot_task.txt
-```
 
 ---
 
