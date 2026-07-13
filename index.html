@@ -466,35 +466,7 @@ footer a{color:var(--accent);text-decoration:none;}
 <!-- VIDEOS -->
 <div class="sec" id="videos">
   <div class="sec-hd"><h2>Video demonstrations</h2></div>
-  <p class="sec-sub">Closed-loop inference on the physical FFW-SG2 AI Worker and in IsaacLab simulation. Task: <em>"Put the yellow paint brush into the crate."</em></p>
-
-  <div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
-    <span class="vb vb-real">GR00T N1.6 · real robot · 100 Hz</span>
-  </div>
-  <div class="vgrid">
-    <div class="vc">
-      <video controls preload="metadata">
-        <source src="videos/groot_n16_real_success.mp4" type="video/mp4">
-        Video not available.
-      </video>
-      <div class="vi">
-        <span class="vb vb-real">Success</span>
-        <h4>Real-robot successful trial</h4>
-        <p>GR00T N1.6 grasps the paint brush from the pegboard and places it into the crate in a single continuous motion at 100 Hz.</p>
-      </div>
-    </div>
-    <div class="vc">
-      <video controls preload="metadata">
-        <source src="videos/groot_n16_real_failure.mp4" type="video/mp4">
-        Video not available.
-      </video>
-      <div class="vi">
-        <span class="vb" style="background:rgba(239,68,68,.12);color:var(--danger);border:1px solid var(--danger)">Grasp drop</span>
-        <h4>Grasp drop failure mode</h4>
-        <p>Brush contacted and briefly grasped but dropped during extraction from the pegboard ring holder — the dominant failure mode (10/100 trials).</p>
-      </div>
-    </div>
-  </div>
+  <p class="sec-sub">Closed-loop inference in IsaacLab simulation. Task: <em>"Put the yellow paint brush into the crate."</em></p>
 
   <div style="margin-bottom:10px;margin-top:8px;display:flex;align-items:center;gap:10px">
     <span class="vb vb-sim">GR00T N1.6 · IsaacLab simulation · 60 Hz</span>
