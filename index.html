@@ -464,6 +464,7 @@ footer a{color:var(--accent);text-decoration:none;}
 <hr class="div">
 
   <!-- VIDEOS -->
+<!-- VIDEOS -->
 <div class="sec" id="videos">
   <div class="sec-hd"><h2>Video demonstrations</h2></div>
   <p class="sec-sub">Closed-loop inference in IsaacLab simulation. Task: <em>"Put the yellow paint brush into the crate."</em></p>
@@ -491,6 +492,23 @@ footer a{color:var(--accent);text-decoration:none;}
         <span class="vb vb-n17">N1.7 · Simulation · 100%</span>
         <h4>GR00T N1.7 simulation</h4>
         <p>GR00T N1.7 (Cosmos-Reason2-2B backbone) achieves identical 100% simulation success. Real-robot deployment deferred pending GA release.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:10px;margin-top:26px;display:flex;align-items:center;gap:10px">
+    <span class="vb vb-sim">Web GUI · Stop / Resume control</span>
+  </div>
+  <div class="vgrid">
+    <div class="vc">
+      <video controls preload="metadata">
+        <source src="https://media.githubusercontent.com/media/Rao-Sanaullah/Groot_results/main/stopandplay.mp4" type="video/mp4">
+        Video not available.
+      </video>
+      <div class="vi">
+        <span class="vb vb-sim">GUI · Live control</span>
+        <h4>Stop and resume during inference</h4>
+        <p>The web GUI can pause the running policy mid-execution (robot holds its current pose) and resume it on command, without restarting the simulation or the policy server.</p>
       </div>
     </div>
   </div>
