@@ -2,8 +2,7 @@
 
 > Closed-loop VLA evaluation of NVIDIA GR00T N1.6 and N1.7 on the ROBOTIS FFW-SG2 AI Worker — simulation and real-robot deployment for bimanual pegboard manipulation.
 
-**[📊 Full Results Page](https://rao-sanaullah.github.io/Groot_results/)** · **[🔧 GR00TN1.6 & N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN16_and_N17_Installation_Guide/)** · **[⭐ StarVLA Results](https://rao-sanaullah.github.io/starVLA_results/)** · **[📄 Paper](#)**
-
+**[📊 Full Results Page](https://rao-sanaullah.github.io/Groot_results/)** · **[🔧 GR00TN1.6 & N1.7 Setup Guide](https://rao-sanaullah.github.io/GR00TN16_and_N17_Installation_Guide/)** ·
 ---
 
 ## Key Results
