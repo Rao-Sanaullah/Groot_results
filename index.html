@@ -529,12 +529,13 @@ footer a{color:var(--accent);text-decoration:none;}
   </div>
 </div>
 
-  <div style="margin-bottom:10px;margin-top:26px;display:flex;align-items:center;gap:10px">
+<div style="margin-bottom:10px;margin-top:26px;display:flex;align-items:center;gap:10px">
     <span class="vb vb-sim">Web GUI · Stop / Resume control</span>
   </div>
-  <div class="vgrid">
+  <div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:16px">
+    <div></div>
     <div class="vc">
-      <video controls preload="metadata">
+      <video controls preload="metadata" style="max-height:420px;width:100%">
         <source src="https://media.githubusercontent.com/media/Rao-Sanaullah/Groot_results/main/stopandplay.mp4" type="video/mp4">
         Video not available.
       </video>
@@ -544,6 +545,7 @@ footer a{color:var(--accent);text-decoration:none;}
         <p>The web GUI can pause the running policy mid-execution (robot holds its current pose) and resume it on command, without restarting the simulation or the policy server.</p>
       </div>
     </div>
+    <div></div>
   </div>
 </div>
   
