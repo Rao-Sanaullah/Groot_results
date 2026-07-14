@@ -467,7 +467,39 @@ footer a{color:var(--accent);text-decoration:none;}
 <!-- VIDEOS -->
 <div class="sec" id="videos">
   <div class="sec-hd"><h2>Video demonstrations</h2></div>
-  <p class="sec-sub">Closed-loop inference in IsaacLab simulation. Task: <em>"Put the yellow paint brush into the crate."</em></p>
+
+  <!-- REAL ROBOT — shown first -->
+  <p class="sec-sub">Real-robot deployment on the physical FFW-SG2. Full 100-trial evaluation, 88% success. Task: <em>"pick a brush and place to the crate."</em></p>
+  <div style="margin-bottom:10px;margin-top:8px;display:flex;align-items:center;gap:10px">
+    <span class="vb vb-real">GR00T N1.6 · Real robot · 100 trials · 88% success</span>
+  </div>
+  <div class="vgrid">
+    <div class="vc">
+      <video controls preload="metadata">
+        <source src="https://media.githubusercontent.com/media/Rao-Sanaullah/Groot_results/main/IMG_2617.mp4" type="video/mp4">
+        Video not available.
+      </video>
+      <div class="vi">
+        <span class="vb vb-real">Real robot</span>
+        <h4>Real-robot evaluation (part 1)</h4>
+        <p>GR00T N1.6 deployed on the physical FFW-SG2, fine-tuned on 500 real demonstrations. Continuous evaluation run on the matched pegboard workspace.</p>
+      </div>
+    </div>
+    <div class="vc">
+      <video controls preload="metadata">
+        <source src="https://media.githubusercontent.com/media/Rao-Sanaullah/Groot_results/main/IMG_2619.mp4" type="video/mp4">
+        Video not available.
+      </video>
+      <div class="vi">
+        <span class="vb vb-real">Real robot</span>
+        <h4>Real-robot evaluation (part 2)</h4>
+        <p>Continuation of the 100-trial evaluation. Overall 88% success; the main failure mode is grasp-drops during vertical pegboard extraction.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMULATION — shown second -->
+  <p class="sec-sub" style="margin-top:38px">Closed-loop inference in IsaacLab simulation. Task: <em>"Put the yellow paint brush into the crate."</em></p>
   <div style="margin-bottom:10px;margin-top:8px;display:flex;align-items:center;gap:10px">
     <span class="vb vb-sim">GR00T N1.6 · IsaacLab simulation · 60 Hz</span>
   </div>
@@ -495,6 +527,7 @@ footer a{color:var(--accent);text-decoration:none;}
       </div>
     </div>
   </div>
+</div>
 
   <div style="margin-bottom:10px;margin-top:26px;display:flex;align-items:center;gap:10px">
     <span class="vb vb-sim">Web GUI · Stop / Resume control</span>
